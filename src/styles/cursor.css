@@ -1,0 +1,57 @@
+/* Custom Cursor Styles */
+
+.custom-cursor-dot,
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transform: translate(-50%, -50%);
+  user-select: none;
+  will-change: transform, width, height, opacity;
+}
+
+/* Tiny central dot: 4px solid #0A0A0A */
+.custom-cursor-dot {
+  width: 4px;
+  height: 4px;
+  background-color: var(--text);
+  transition: opacity var(--duration-fast) var(--ease-editorial);
+}
+
+/* Thin outer ring: 32px with 1px border #0A0A0A */
+.custom-cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(10, 10, 10, 0.35);
+  background: transparent;
+  transition: width var(--duration-fast) var(--ease-editorial),
+              height var(--duration-fast) var(--ease-editorial),
+              border-color var(--duration-fast) var(--ease-editorial),
+              background-color var(--duration-fast) var(--ease-editorial),
+              opacity var(--duration-fast) var(--ease-editorial);
+}
+
+/* Expanded state on hoverable elements */
+.custom-cursor-ring.is-hovered {
+  width: 54px;
+  height: 54px;
+  border-color: rgba(10, 10, 10, 0.7);
+  background-color: rgba(10, 10, 10, 0.03);
+}
+
+/* Hidden when cursor leaves window or inactive */
+.custom-cursor-dot.is-hidden,
+.custom-cursor-ring.is-hidden {
+  opacity: 0;
+}
+
+/* Disable on touch devices and small viewports */
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+}

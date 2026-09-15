@@ -1,0 +1,485 @@
+/* ==========================================================================
+   Certifications / FDPs / Workshops — Passport Strip + Bottom-Sheet Drawer
+   ========================================================================== */
+
+.cert-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-warm);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.cert-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* ─── Stats Bar ─── */
+
+.cert-stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--line);
+  margin-bottom: var(--space-xl);
+}
+
+.cert-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cert-stat-value {
+  font-family: var(--font-family);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.cert-stat-label {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ─── Passport Strip ─── */
+
+.cert-strip-wrapper {
+  position: relative;
+  overflow: hidden;
+  /* Edge fade */
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.cert-strip-track {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0.5rem clamp(1rem, 4vw, 3rem);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cert-strip-track:active { cursor: grabbing; }
+.cert-strip-track::-webkit-scrollbar { display: none; }
+
+/* ─── Individual Stamp ─── */
+
+.cert-stamp {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  cursor: default;
+  outline: none;
+  /* Accessible focus */
+}
+
+.cert-stamp:focus-visible .cert-stamp-seal-path {
+  stroke-dashoffset: 0;
+}
+
+/* Seal graphic container */
+.cert-stamp-graphic {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG for the circular seal outline */
+.cert-stamp-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* The circle/polygon that draws itself on hover */
+.cert-stamp-seal-path {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.25;
+  /* Full circumference ≈ 2π × 32 ≈ 201 */
+  stroke-dasharray: 201;
+  stroke-dashoffset: 201;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 500ms var(--ease-editorial);
+}
+
+.cert-stamp:hover .cert-stamp-seal-path,
+.cert-stamp:focus-visible .cert-stamp-seal-path {
+  stroke-dashoffset: 0;
+}
+
+/* Central acronym / icon text */
+.cert-stamp-acronym {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-family);
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-align: center;
+  max-width: 56px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+/* Issuer + year beneath stamp */
+.cert-stamp-info {
+  text-align: center;
+  max-width: 90px;
+}
+
+.cert-stamp-org {
+  display: block;
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 90px;
+}
+
+.cert-stamp-year {
+  display: block;
+  font-family: var(--font-family);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+/* ─── View All Button ─── */
+
+.cert-view-all-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-lg);
+}
+
+.cert-view-all-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding: 0.9rem 2.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease;
+}
+
+.cert-view-all-btn:hover {
+  background-color: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.cert-view-all-btn:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+.cert-view-all-count {
+  font-size: 0.6875rem;
+  opacity: 0.65;
+}
+
+/* ─── Drawer Overlay ─── */
+
+.cert-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 10, 10, 0.45);
+  z-index: 150;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 350ms var(--ease-editorial);
+}
+
+.cert-drawer-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ─── Bottom-Sheet Drawer ─── */
+
+.cert-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 160;
+  background-color: var(--bg);
+  border-top: 1px solid var(--line);
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 400ms var(--ease-editorial);
+}
+
+.cert-drawer.is-open {
+  transform: translateY(0);
+}
+
+/* Reduced motion: skip slide animation */
+@media (prefers-reduced-motion: reduce) {
+  .cert-drawer,
+  .cert-drawer-overlay {
+    transition: none;
+  }
+  .cert-stamp-seal-path {
+    transition: none;
+  }
+}
+
+/* Drawer handle bar */
+.cert-drawer-handle {
+  display: flex;
+  justify-content: center;
+  padding: 0.85rem 0 0.5rem;
+  flex-shrink: 0;
+}
+
+.cert-drawer-handle-bar {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--line);
+}
+
+/* Drawer header */
+.cert-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem var(--container-padding) 1rem;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.cert-drawer-title {
+  font-family: var(--font-family);
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.cert-drawer-subtitle {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.cert-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  color: var(--text-muted);
+  transition: color 200ms ease, border-color 200ms ease;
+  flex-shrink: 0;
+}
+
+.cert-drawer-close:hover { color: var(--text); border-color: var(--text-secondary); }
+
+.cert-drawer-close:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+/* Filter tabs inside drawer */
+.cert-drawer-tabs {
+  display: flex;
+  gap: var(--space-lg);
+  padding: 0.85rem var(--container-padding);
+  border-bottom: 1px solid var(--line-subtle);
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+
+.cert-drawer-tabs::-webkit-scrollbar { display: none; }
+
+.cert-drawer-tab {
+  background: transparent;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem 0;
+  white-space: nowrap;
+  position: relative;
+  transition: color 200ms ease;
+}
+
+.cert-drawer-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms var(--ease-editorial);
+}
+
+.cert-drawer-tab.is-active { color: var(--text); }
+.cert-drawer-tab.is-active::after { transform: scaleX(1); }
+
+/* Scrollable content area */
+.cert-drawer-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1;
+  padding: 0 var(--container-padding) var(--space-xl);
+}
+
+/* Dense item list */
+.cert-drawer-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+  margin-top: var(--space-sm);
+}
+
+.cert-drawer-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line-subtle);
+  transition: background-color 200ms ease;
+}
+
+.cert-drawer-row:hover {
+  background-color: var(--bg-subtle);
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.cert-drawer-row-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.cert-drawer-row-title {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.cert-drawer-row-issuer {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.cert-drawer-row-date {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cert-drawer-empty {
+  padding: var(--space-xl) 0;
+  text-align: center;
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 640px) {
+  .cert-drawer { max-height: 92vh; }
+
+  .cert-drawer-header,
+  .cert-drawer-tabs,
+  .cert-drawer-body {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .cert-stats-bar {
+    gap: var(--space-md);
+  }
+
+  .cert-drawer-row {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .cert-drawer-row-date {
+    font-size: 0.6875rem;
+  }
+}

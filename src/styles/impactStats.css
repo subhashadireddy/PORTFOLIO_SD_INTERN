@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Editorial Impact Stats Section — Typography Counter Wall & Database Strip
+   ========================================================================== */
+
+.impact-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-subtle); /* #FAFAFA */
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.impact-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Full-Width Typography Counter Wall (Strictly NO Boxes, NO Cards) */
+.impact-counter-wall {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: var(--space-2xl);
+  row-gap: var(--space-2xl);
+  width: 100%;
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-3xl);
+}
+
+.impact-counter-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--line);
+  cursor: default;
+}
+
+/* Number Container with Animated Hover Underline */
+.impact-number-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: var(--space-xs);
+  align-self: flex-start;
+}
+
+.impact-stat-number {
+  font-family: var(--font-family);
+  font-size: clamp(2.75rem, 5vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  display: block;
+  user-select: none;
+}
+
+/* Thin underline that draws beneath the number on hover */
+.impact-number-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 350ms var(--ease-editorial);
+}
+
+.impact-counter-item:hover .impact-number-underline {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Label & Context Note */
+.impact-stat-label {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.2rem;
+  line-height: 1.35;
+}
+
+.impact-stat-note {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Minimalist Database Comparison Strip / Table
+   ========================================================================== */
+
+.impact-db-section {
+  position: relative;
+  width: 100%;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--line);
+}
+
+.impact-db-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.impact-db-title {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.impact-db-tagline {
+  font-family: var(--font-family);
+  font-size: var(--font-eyebrow);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.impact-db-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.impact-db-table th {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.impact-db-table td {
+  font-family: var(--font-family);
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--line-subtle);
+  color: var(--text);
+  vertical-align: middle;
+  transition: background-color var(--duration-fast) var(--ease-editorial);
+}
+
+.impact-db-row:hover td {
+  background-color: var(--bg);
+}
+
+.impact-db-name {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.impact-db-val {
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.impact-db-meta {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.impact-db-citations {
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .impact-counter-wall {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--space-xl);
+    row-gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .impact-counter-wall {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-lg);
+    row-gap: var(--space-lg);
+  }
+
+  .impact-stat-number {
+    font-size: 2.75rem;
+  }
+
+  .impact-db-table th:nth-child(4),
+  .impact-db-table td:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .impact-counter-wall {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-md);
+  }
+
+  .impact-db-table th,
+  .impact-db-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .impact-db-val,
+  .impact-db-citations {
+    font-size: 1.05rem;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .impact-number-underline {
+    transition: none !important;
+  }
+}

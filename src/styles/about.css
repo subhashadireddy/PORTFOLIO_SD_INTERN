@@ -1,0 +1,273 @@
+/* ==========================================================================
+   Editorial About Section — Pinned Signature Orbit Sequence
+   ========================================================================== */
+
+.about-pinned-outer {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-subtle);
+}
+
+.about-pinned-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-subtle); /* #FAFAFA */
+}
+
+/* Background watermark section counter */
+.about-bg-counter {
+  position: absolute;
+  top: 6%;
+  left: var(--container-padding);
+  font-family: var(--font-family);
+  font-size: var(--font-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  z-index: 5;
+}
+
+/* Central Stage Arena for Orbit Animation (Desktop) */
+.about-arena {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The Animated Portrait (Starts Centered, then Docks Left) */
+.about-portrait-anchor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 400px;
+  z-index: 10;
+  pointer-events: none;
+  will-change: transform, opacity, width, left, top;
+}
+
+.about-portrait-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 16px; /* Soft natural organic edge without card border */
+  filter: grayscale(100%) contrast(106%);
+  display: block;
+}
+
+/* Orbiting Words Container */
+.about-orbit-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.about-orbit-word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: var(--font-family);
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  white-space: nowrap;
+  pointer-events: none;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+/* Settled Docked Layout (Revealed in Stage 3 & 4) */
+.about-settled-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: calc(var(--navbar-height) + var(--space-md)) var(--container-padding) var(--space-lg);
+  display: grid;
+  grid-template-columns: 34% 66%;
+  align-items: center;
+  gap: var(--space-xl);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.about-settled-grid.is-interactive {
+  pointer-events: all;
+}
+
+/* Left Dock Column Placeholder (Image occupies this space visually) */
+.about-settled-left {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Right Content Column: Settled Heading + Biography + Typographic Stats */
+.about-settled-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: var(--space-md);
+}
+
+.about-settled-heading-wrap {
+  margin-bottom: var(--space-md);
+}
+
+.about-settled-eyebrow {
+  font-family: var(--font-family);
+  font-size: var(--font-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.about-settled-heading {
+  font-family: var(--font-family);
+  font-size: clamp(2rem, 3.8vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.about-bio-narrative {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  max-width: 48rem;
+}
+
+.about-bio-lead {
+  font-family: var(--font-family);
+  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.about-bio-body {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* Typographic Statistics (NO Card Boxes, Pure Whitespace & Type) */
+.about-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--line);
+}
+
+.about-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.about-stat-number {
+  font-family: var(--font-family);
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.about-stat-label {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* ==========================================================================
+   Mobile Layout (ScrollTrigger Pinning & Orbit Disabled for Mobile)
+   ========================================================================== */
+
+.about-mobile-flow {
+  display: none;
+  width: 100%;
+  padding: var(--space-2xl) var(--container-padding);
+}
+
+@media (max-width: 960px) {
+  .about-pinned-stage {
+    display: none !important;
+  }
+
+  .about-mobile-flow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .about-mobile-portrait-wrap {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .about-mobile-portrait {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 16px;
+    filter: grayscale(100%) contrast(106%);
+  }
+
+  .about-mobile-heading {
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    line-height: 1.1;
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .about-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .about-orbit-word {
+    transform: none !important;
+  }
+}

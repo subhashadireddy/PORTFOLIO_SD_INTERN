@@ -1,0 +1,80 @@
+:root {
+  /* Strict Monochrome Color Palette */
+  --bg: #FFFFFF;
+  --bg-subtle: #FAFAFA;
+  --bg-warm: #F5F5F3;
+  --text: #0A0A0A;
+  --text-secondary: #6B6B6B;
+  --text-muted: #8E8E8E;
+  --line: #EAEAEA;
+  --line-subtle: #F2F2F2;
+
+  /* Typography */
+  --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Display & Title Scales */
+  --font-display: clamp(3.5rem, 8vw, 7.5rem);      /* 56px to 120px */
+  --font-section-title: clamp(2.5rem, 5vw, 5rem);  /* 40px to 80px */
+  --font-h2: clamp(1.75rem, 3.2vw, 2.75rem);       /* 28px to 44px */
+  --font-h3: clamp(1.25rem, 2vw, 1.75rem);         /* 20px to 28px */
+  --font-body-lg: 1.125rem;                         /* 18px */
+  --font-body: 1rem;                               /* 16px */
+  --font-caption: 0.875rem;                        /* 14px */
+  --font-eyebrow: 0.75rem;                         /* 12px */
+
+  /* Leading */
+  --line-height-display: 0.98;
+  --line-height-tight: 1.15;
+  --line-height-body: 1.7;
+
+  /* Editorial Spacing Scale */
+  --space-2xs: 0.25rem;   /* 4px */
+  --space-xs: 0.5rem;     /* 8px */
+  --space-sm: 1rem;       /* 16px */
+  --space-md: 1.5rem;     /* 24px */
+  --space-lg: 2.5rem;     /* 40px */
+  --space-xl: 4rem;       /* 64px */
+  --space-2xl: 6.5rem;    /* 104px */
+  --space-3xl: 10rem;     /* 160px */
+
+  /* Editorial Grid & Containers */
+  --container-max-width: 1400px;
+  --container-padding: 3rem;
+  --grid-gutter: 2.5rem;
+
+  /* Timing & Motion */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 0.25s;
+  --duration-normal: 0.45s;
+  --duration-slow: 0.9s;
+
+  /* Elevation (No drop shadows - rely on hairlines & tone) */
+  --z-base: 1;
+  --z-nav: 50;
+  --z-progress: 90;
+  --z-cursor: 100;
+  --z-preloader: 200;
+}
+
+/* Tablet Breakpoint (640px to 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --container-padding: 2rem;
+    --grid-gutter: 1.75rem;
+    --space-2xl: 5rem;
+    --space-3xl: 7rem;
+  }
+}
+
+/* Mobile Breakpoint (< 640px) */
+@media (max-width: 640px) {
+  :root {
+    --container-padding: 1.25rem;
+    --grid-gutter: 1rem;
+    --space-xl: 2.75rem;
+    --space-2xl: 3.75rem;
+    --space-3xl: 5rem;
+    --font-body: 0.9375rem;
+    --font-body-lg: 1rem;
+  }
+}

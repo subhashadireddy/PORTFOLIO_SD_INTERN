@@ -1,0 +1,80 @@
+export const grantsData = [
+  {
+    id: 'aicte-grant',
+    title: "Design Thinking and Innovation Workshop for Principals & Teachers",
+    category: "Innovation Project Grant",
+    type: "National Sponsored Grant",
+    fundingBody: "All India Council for Technical Education (AICTE)",
+    scheme: "AICTE Grant-in-Aid Scheme",
+    amount: "₹2,45,000",
+    amountDetail: "2.45 Lakhs Sanctioned",
+    year: "2025–2026",
+    role: "Principal Investigator / Coordinator",
+    context: "Executive innovation leadership immersion program sanctioned by AICTE for educational institutional leaders across the region."
+  },
+  {
+    id: 'stpi-chunauti',
+    title: "Smart Shoe — Better Walking for Future",
+    category: "Innovation Project Grant",
+    type: "National Incubation Grant",
+    fundingBody: "Software Technology Parks of India (STPI), Ministry of Electronics & IT (MeitY)",
+    scheme: "CHUNAUTI 2.0 Next Generation Incubation Scheme (NGIS)",
+    amount: "₹90,000",
+    amountDetail: "Beyond Ideation Stage Grant",
+    year: "2022–2023",
+    role: "Lead Innovator",
+    context: "National productization and prototyping grant for smart biomechanical insole architecture and fall prevention hardware."
+  },
+  {
+    id: 'viit-seed-1',
+    title: "Gait Diagnosis Using Fuzzy Logic with Wearable Tech for Prolonged Disorders of Diabetic Cardiomyopathy",
+    category: "Seed Fund Grant",
+    type: "Institutional Research Grant",
+    fundingBody: "Vignan's Institute of Information Technology (A)",
+    scheme: "VIIT Internal R&D Seed Scheme",
+    amount: "₹1,50,000",
+    amountDetail: "Sanctioned: 07/08/2017",
+    year: "2017–2018",
+    role: "Principal Investigator",
+    context: "Internal seed research grant for early-stage sensor fabric development and clinical gait telemetry for diabetic cardiomyopathy."
+  },
+  {
+    id: 'viit-seed-2',
+    title: "Clinical Model Machine Learning for Gait Observation Cardiovascular Disease Diagnosis",
+    category: "Seed Fund Grant",
+    type: "Institutional Research Grant",
+    fundingBody: "Vignan's Institute of Information Technology (A)",
+    scheme: "VIIT Internal R&D Seed Scheme",
+    amount: "₹50,000",
+    amountDetail: "Sanctioned: 04/09/2020",
+    year: "2020–2021",
+    role: "Principal Investigator",
+    context: "Seed investigation into machine learning classifiers applied to clinical gait datasets for cardiovascular observation."
+  },
+  {
+    id: 'scitisense-medtech',
+    title: "ScitiSense Startup Incubation",
+    category: "Incubation & Translation",
+    type: "Healthcare Innovation",
+    fundingBody: "MedTech Centre of Excellence (CoE), STPI Lucknow",
+    scheme: "MedTech Open Challenge Program (OCP) 5.0",
+    amount: "Resident Incubation",
+    amountDetail: "CoE Labs & Commercialization",
+    year: "2024",
+    role: "Founder / Technical Mentor",
+    context: "Selected for institutional incubation residency to accelerate biomedical sensor productization and medical device prototyping."
+  },
+  {
+    id: 'illuminisense-stpi',
+    title: "Illuminisense Startup Incubation",
+    category: "Incubation & Translation",
+    type: "Deep-Tech Startup Incubation",
+    fundingBody: "AIC STPI Bengaluru",
+    scheme: "Open Challenge Program (OCP) 6.0",
+    amount: "Incubation Fellowship",
+    amountDetail: "Ecosystem Acceleration Grant",
+    year: "2024",
+    role: "Innovator / Startup Mentor",
+    context: "Selected for deep-tech acceleration under STPI flagship framework for sensor intelligence and intellectual property mentorship."
+  }
+];

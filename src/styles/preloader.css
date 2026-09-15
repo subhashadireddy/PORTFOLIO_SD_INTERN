@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Editorial Preloader — Masked Name Reveal & Smooth Vertical Wipe
+   ========================================================================== */
+
+.preloader-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg);
+  z-index: var(--z-preloader);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  transition: transform 0.85s var(--ease-editorial), opacity 0.85s var(--ease-editorial);
+  will-change: transform, opacity;
+}
+
+/* Smooth vertical screen wipe exit */
+.preloader-overlay.is-wiping {
+  transform: translateY(-100%);
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--space-md);
+  max-width: 900px;
+}
+
+/* Eyebrow Label */
+.preloader-eyebrow-wrapper {
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.preloader-eyebrow {
+  font-family: var(--font-family);
+  font-size: var(--font-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  display: inline-block;
+  transform: translateY(120%);
+  transition: transform 0.7s var(--ease-editorial);
+}
+
+.preloader-overlay.is-active .preloader-eyebrow {
+  transform: translateY(0);
+}
+
+/* Masked Name Typography Reveal */
+.preloader-name-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25em 0.55em;
+}
+
+.preloader-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+}
+
+.preloader-word {
+  display: inline-block;
+  font-family: var(--font-family);
+  font-size: clamp(1.85rem, 4.8vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  transform: translateY(120%);
+  transition: transform 0.85s var(--ease-editorial);
+  will-change: transform;
+}
+
+.preloader-overlay.is-active .preloader-word {
+  transform: translateY(0);
+}
+
+/* Elegant Staggered Word Reveal */
+.preloader-overlay.is-active .preloader-word-mask:nth-child(1) .preloader-word { transition-delay: 100ms; }
+.preloader-overlay.is-active .preloader-word-mask:nth-child(2) .preloader-word { transition-delay: 200ms; }
+.preloader-overlay.is-active .preloader-word-mask:nth-child(3) .preloader-word { transition-delay: 300ms; }
+.preloader-overlay.is-active .preloader-word-mask:nth-child(4) .preloader-word { transition-delay: 400ms; }
+.preloader-overlay.is-active .preloader-word-mask:nth-child(5) .preloader-word { transition-delay: 500ms; }
+
+/* Thin Editorial Vertical Wipe Indicator Line */
+.preloader-divider-wrapper {
+  margin-top: var(--space-xl);
+  width: 1px;
+  height: 54px;
+  background-color: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.preloader-divider-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--text);
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 0.9s var(--ease-editorial) 300ms;
+}
+
+.preloader-overlay.is-active .preloader-divider-line {
+  transform: scaleY(1);
+}
+
+/* Accessibility: Immediate dismiss on reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .preloader-overlay {
+    display: none !important;
+  }
+}

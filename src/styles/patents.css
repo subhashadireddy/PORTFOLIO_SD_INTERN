@@ -1,0 +1,255 @@
+/* ==========================================================================
+   Patents & Copyrights — Filing Cabinet / Editorial Index List
+   ========================================================================== */
+
+.patents-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-subtle);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.patents-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Segmented Tab Bar */
+.patents-tab-bar {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2xl);
+  border-bottom: 1px solid var(--line);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  padding-bottom: 0;
+}
+
+.patents-tab-btn {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  padding: 0 0 var(--space-sm) 0;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-editorial);
+  white-space: nowrap;
+}
+
+.patents-tab-btn:hover {
+  color: var(--text-secondary);
+}
+
+.patents-tab-btn.is-active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Count badge within tab */
+.patents-tab-count {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+/* Sliding underline indicator */
+.patents-tab-indicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background-color: var(--text);
+  transition: left 350ms var(--ease-editorial), width 350ms var(--ease-editorial);
+}
+
+/* Tab Content Panels */
+.patents-panel {
+  min-height: 200px;
+}
+
+/* Content fade + slide transitions */
+.patents-panel-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.patents-panel-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 320ms var(--ease-editorial), transform 320ms var(--ease-editorial);
+}
+.patents-panel-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.patents-panel-exit-active {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+/* Editorial Index List */
+.patents-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+/* Individual Patent / IP Row */
+.patent-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(0.75rem, 2vw, 1.25rem);
+  border-bottom: 1px solid var(--line-subtle);
+  background-color: transparent;
+  transition: transform 300ms var(--ease-editorial),
+              background-color 250ms var(--ease-editorial);
+  cursor: default;
+}
+
+.patent-row:hover {
+  transform: translateY(-2px);
+  background-color: var(--bg);
+}
+
+/* Surrounding rows compress slightly on adjacent hover */
+.patents-list:has(.patent-row:hover) .patent-row:not(:hover) {
+  transform: translateY(0);
+  opacity: 0.82;
+}
+
+.patent-row-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+/* Patent Title */
+.patent-title {
+  font-family: var(--font-family);
+  font-size: clamp(0.9375rem, 1.4vw, 1.0625rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+/* Meta Row: App No., Inventors, Dates */
+.patent-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1.25rem;
+}
+
+.patent-meta-tag {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.patent-meta-key {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+/* Authority / Country tag at the far right */
+.patent-authority-tag {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Status badge for granted rows */
+.patent-status-badge {
+  display: inline-block;
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  transition: border-color 250ms var(--ease-editorial);
+}
+
+.patent-row:hover .patent-status-badge {
+  border-color: var(--text-secondary);
+}
+
+/* Empty state */
+.patents-empty {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  padding: var(--space-2xl) 0;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .patents-tab-bar {
+    gap: var(--space-lg);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .patents-tab-bar::-webkit-scrollbar { display: none; }
+
+  .patent-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .patent-authority-tag {
+    align-self: flex-start;
+  }
+
+  .patents-list:has(.patent-row:hover) .patent-row:not(:hover) {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .patents-tab-bar {
+    gap: var(--space-md);
+  }
+
+  .patents-tab-btn {
+    font-size: 0.8125rem;
+    padding-bottom: var(--space-xs);
+  }
+}

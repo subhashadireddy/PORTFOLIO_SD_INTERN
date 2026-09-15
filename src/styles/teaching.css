@@ -1,0 +1,315 @@
+/* ==========================================================================
+   Teaching — Chalkboard Grid + Academic Project Ledger
+   ========================================================================== */
+
+.teaching-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.teaching-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* ─── Two-column editorial layout ──────────────────────────────────── */
+
+.teaching-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 clamp(3rem, 6vw, 7rem);
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-xl);
+}
+
+/* ─── Column heading ─── */
+
+.teaching-col-label {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.teaching-col-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--line-subtle);
+}
+
+/* ─── Subject / Lab Grid ─────────────────────────────────────────── */
+
+.teaching-word-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Individual subject/lab item */
+.teaching-word-item {
+  position: relative;
+  font-family: var(--font-family);
+  font-size: clamp(0.9375rem, 1.3vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line-subtle);
+  cursor: default;
+  /* Underline via pseudo-element — slides in from left */
+  text-decoration: none;
+  transition: color 250ms var(--ease-editorial);
+}
+
+.teaching-word-item::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;   /* sits exactly on the border */
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text);
+  transition: width 320ms var(--ease-editorial);
+}
+
+.teaching-word-item:hover {
+  color: var(--text);
+}
+
+.teaching-word-item:hover::after {
+  width: 100%;
+}
+
+/* Item index number (subtle, left of label) */
+.teaching-word-index {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  min-width: 1.6rem;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  opacity: 0.6;
+}
+
+/* ─── Vertical divider between the two columns ─── */
+
+.teaching-col-divider {
+  display: none; /* replaced by CSS column gap */
+}
+
+/* ─── Projects Ledger ───────────────────────────────────────────────
+   Full-width, sits below the two-column section
+   ──────────────────────────────────────────────────────────────────── */
+
+.teaching-projects-section {
+  margin-top: var(--space-2xl);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-xl);
+}
+
+.teaching-projects-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.teaching-projects-title {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.teaching-projects-summary {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* Project table container */
+.teaching-project-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line-subtle);
+}
+
+/* Column header row */
+.teaching-project-header-row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto;
+  gap: var(--space-md);
+  padding: 0.5rem clamp(0.5rem, 1.5vw, 1.25rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.teaching-project-col-header {
+  font-family: var(--font-family);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Individual project row */
+.teaching-project-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: clamp(1rem, 2vw, 1.4rem) clamp(0.5rem, 1.5vw, 1.25rem);
+  border-bottom: 1px solid var(--line-subtle);
+  overflow: hidden;
+  transition: background-color 250ms var(--ease-editorial);
+  cursor: default;
+}
+
+.teaching-project-row::before {
+  /* Thin animated left-border accent */
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0%;
+  background-color: var(--text);
+  transition: height 350ms var(--ease-editorial);
+}
+
+.teaching-project-row:hover {
+  background-color: var(--bg-subtle);
+}
+
+.teaching-project-row:hover::before {
+  height: 100%;
+}
+
+/* Year cell */
+.teaching-project-year {
+  font-family: var(--font-family);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--text-muted);
+  transition: color 250ms ease;
+}
+
+.teaching-project-row:hover .teaching-project-year {
+  color: var(--text);
+}
+
+/* Project title cell */
+.teaching-project-title {
+  font-family: var(--font-family);
+  font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+
+/* Degree badge — text-only, no pill */
+.teaching-project-degree {
+  font-family: var(--font-family);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: color 250ms ease;
+}
+
+.teaching-project-row:hover .teaching-project-degree {
+  color: var(--text-secondary);
+}
+
+/* ─── Guidance summary footnote ─── */
+
+.teaching-guidance-note {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--line-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.teaching-guidance-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.teaching-guidance-value {
+  font-family: var(--font-family);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.teaching-guidance-label {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .teaching-body {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 640px) {
+  .teaching-project-header-row,
+  .teaching-project-row {
+    grid-template-columns: 4rem 1fr auto;
+    gap: var(--space-sm);
+  }
+
+  .teaching-project-year {
+    font-size: 0.9375rem;
+  }
+
+  .teaching-project-title {
+    font-size: 0.875rem;
+  }
+
+  .teaching-projects-header {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+}

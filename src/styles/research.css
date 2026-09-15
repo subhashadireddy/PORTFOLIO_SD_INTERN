@@ -1,0 +1,238 @@
+/* ==========================================================================
+   Editorial Research Focus Section — Academic Manuscript Spread
+   ========================================================================== */
+
+.research-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg); /* Pure White #FFFFFF */
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+  overflow: hidden;
+}
+
+.research-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Core Research Domains Tag Bar */
+.research-domains-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-2xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--line);
+}
+
+.research-domain-tag {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  position: relative;
+}
+
+.research-domain-tag:not(:last-child)::after {
+  content: '·';
+  margin-left: var(--space-md);
+  color: var(--text-muted);
+}
+
+/* Manuscript Project Block */
+.research-manuscript-block {
+  position: relative;
+  width: 100%;
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  overflow: hidden;
+}
+
+/* Oversized Faint Watermark Numeral (01 / 02) */
+.research-watermark-num {
+  position: absolute;
+  top: -1.5rem;
+  right: 0;
+  font-family: var(--font-family);
+  font-size: clamp(8rem, 16vw, 15rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  color: var(--text);
+  opacity: 0.05;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.research-manuscript-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Eyebrow & Institution */
+.research-meta-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.research-project-label {
+  font-family: var(--font-family);
+  font-size: var(--font-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.research-institution-badge {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Manuscript Title */
+.research-project-title {
+  font-family: var(--font-family);
+  font-size: clamp(1.85rem, 3.2vw, 3rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  max-width: 58rem;
+  margin-bottom: var(--space-xl);
+}
+
+/* Two-Column Abstract Layout (Resembling Printed Journal Spread) */
+.research-abstract-spread {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space-2xl);
+  row-gap: var(--space-lg);
+  width: 100%;
+}
+
+.research-abstract-col {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  will-change: transform, opacity;
+}
+
+.research-abstract-col.col-left {
+  padding-right: var(--space-md);
+}
+
+.research-abstract-col.col-right {
+  padding-left: var(--space-md);
+  border-left: 1px solid var(--line-subtle);
+}
+
+.research-col-label {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.research-abstract-text {
+  font-family: var(--font-family);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.research-abstract-text-secondary {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* Dynamic Left-to-Right Self-Drawing Divider */
+.research-section-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--line);
+  margin: var(--space-2xl) 0;
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .research-abstract-spread {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .research-abstract-col.col-left {
+    padding-right: 0;
+  }
+
+  .research-abstract-col.col-right {
+    padding-left: 0;
+    border-left: none;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--line-subtle);
+  }
+
+  .research-watermark-num {
+    font-size: 8rem;
+    top: -1rem;
+    opacity: 0.04;
+  }
+}
+
+@media (max-width: 640px) {
+  .research-project-title {
+    font-size: clamp(1.4rem, 6vw, 1.85rem);
+    margin-bottom: var(--space-lg);
+  }
+
+  .research-domains-bar {
+    gap: var(--space-xs);
+  }
+
+  .research-domain-tag {
+    font-size: 0.6875rem;
+  }
+
+  .research-abstract-text {
+    font-size: 0.9375rem;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .research-abstract-col,
+  .research-section-divider {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

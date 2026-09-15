@@ -1,0 +1,245 @@
+/* ==========================================================================
+   Editorial Experience Section — Vertical Career Timeline
+   ========================================================================== */
+
+.experience-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-subtle); /* #FAFAFA */
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.experience-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Experience Summary Header Bar */
+.experience-summary-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.experience-summary-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.experience-summary-stat-val {
+  font-family: var(--font-family);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.experience-summary-stat-lbl {
+  font-family: var(--font-family);
+  font-size: var(--font-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Central Timeline Container */
+.experience-timeline {
+  position: relative;
+  width: 100%;
+  padding: var(--space-xl) 0;
+}
+
+/* Central Static Background Line */
+.experience-track-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: var(--line);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Dynamic Self-Drawing Ink Trace Line */
+.experience-draw-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background-color: var(--text);
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top center;
+  z-index: 2;
+  will-change: transform;
+}
+
+/* Alternating Timeline Entry */
+.experience-entry {
+  position: relative;
+  width: 100%;
+  margin-bottom: var(--space-2xl);
+  z-index: 3;
+}
+
+.experience-entry:last-child {
+  margin-bottom: 0;
+}
+
+/* Desktop Alternating Column Spans */
+.experience-entry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 100%;
+}
+
+.experience-card-col {
+  width: 100%;
+  max-width: 520px;
+}
+
+.experience-entry.is-left .experience-card-col {
+  grid-column: 1;
+  margin-right: auto;
+  padding-right: var(--space-2xl);
+  text-align: right;
+}
+
+.experience-entry.is-right .experience-card-col {
+  grid-column: 2;
+  margin-left: auto;
+  padding-left: var(--space-2xl);
+  text-align: left;
+}
+
+/* Minimal Solid Circle Timeline Dot */
+.experience-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: var(--text); /* #0A0A0A */
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 4;
+  transition: box-shadow var(--duration-fast) var(--ease-editorial);
+}
+
+.experience-entry:hover .experience-dot {
+  box-shadow: 0 0 0 5px rgba(10, 10, 10, 0.1);
+}
+
+/* Entry Content Typography */
+.experience-date-text {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.experience-role-title {
+  font-family: var(--font-family);
+  font-size: clamp(1.25rem, 1.8vw, 1.625rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+.experience-org-text {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.experience-location-text {
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.experience-desc-text {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Responsive Adaptations (Tablet & Mobile Single-Column Timeline)
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .experience-track-line,
+  .experience-draw-line {
+    left: 18px;
+    transform: none;
+  }
+
+  .experience-entry-grid {
+    display: block;
+  }
+
+  .experience-card-col {
+    max-width: 100%;
+  }
+
+  .experience-entry.is-left .experience-card-col,
+  .experience-entry.is-right .experience-card-col {
+    grid-column: auto;
+    padding-left: 56px;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+
+  .experience-dot {
+    left: 18px;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  .experience-summary-bar {
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .experience-draw-line {
+    transform: scaleY(1) !important;
+  }
+  .experience-dot {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+  .experience-card-col {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

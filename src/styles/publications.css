@@ -1,0 +1,406 @@
+/* ==========================================================================
+   Publications — Academic Library Catalogue
+   ========================================================================== */
+
+.pub-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-subtle);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.pub-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* ─── Controls Bar: Search + Category Tabs ─── */
+
+.pub-controls {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+/* Search field */
+.pub-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pub-search-icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.pub-search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  outline: none;
+  font-family: var(--font-family);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 400;
+  color: var(--text);
+  padding: 0.75rem 0 0.75rem 1.75rem;
+  transition: border-color 250ms var(--ease-editorial);
+  letter-spacing: -0.01em;
+}
+
+.pub-search-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.pub-search-input:focus {
+  border-bottom-color: var(--text);
+}
+
+/* Clear search button */
+.pub-search-clear {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease, color 200ms ease;
+  font-family: var(--font-family);
+}
+
+.pub-search-clear.is-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.pub-search-clear:hover {
+  color: var(--text);
+}
+
+/* Category Tabs (text + animated underline, NO pills) */
+.pub-tabs {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-lg);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pub-tabs::-webkit-scrollbar { display: none; }
+
+.pub-tab-btn {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.4rem 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 250ms var(--ease-editorial);
+}
+
+.pub-tab-btn:hover { color: var(--text-secondary); }
+
+.pub-tab-btn.is-active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.pub-tab-count {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+/* Sliding underline indicator */
+.pub-tab-indicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background-color: var(--text);
+  transition: left 320ms var(--ease-editorial), width 320ms var(--ease-editorial);
+  pointer-events: none;
+}
+
+/* ─── Results Meta Row ─── */
+
+.pub-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  min-height: 1.5rem;
+}
+
+.pub-result-count {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ─── Publication List ─── */
+
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+/* Publication Row */
+.pub-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: var(--space-md);
+  padding: clamp(1.25rem, 2.5vw, 1.85rem) clamp(0.75rem, 1.5vw, 1.25rem);
+  border-bottom: 1px solid var(--line-subtle);
+  background-color: transparent;
+  cursor: default;
+  transition: background-color 250ms var(--ease-editorial),
+              transform 300ms var(--ease-editorial);
+  /* Entrance animation class will add opacity/translateY */
+}
+
+.pub-row:hover {
+  background-color: var(--bg);
+}
+
+/* Entrance animation applied via JS */
+.pub-row.pub-entering {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.pub-row.pub-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 380ms var(--ease-editorial), transform 380ms var(--ease-editorial);
+}
+
+.pub-row-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+/* Authors line */
+.pub-authors {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* Publication title (primary) */
+.pub-title {
+  font-family: var(--font-family);
+  font-size: clamp(0.9375rem, 1.4vw, 1.0625rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+/* Journal name — italic + secondary colour */
+.pub-venue {
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Volume / issue suffix (non-italic) */
+.pub-volume {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+/* Year tag */
+.pub-year-tag {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+
+/* ─── DOI / Link Arrow ─── */
+
+.pub-link-col {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.pub-doi-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color 200ms ease;
+}
+
+.pub-doi-link:hover {
+  color: var(--text);
+}
+
+.pub-doi-arrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem;
+  transition: transform 250ms var(--ease-editorial);
+  line-height: 1;
+}
+
+.pub-doi-link:hover .pub-doi-arrow {
+  transform: translateX(4px);
+}
+
+/* Category chip on row (text-only) */
+.pub-category-chip {
+  display: inline-block;
+  font-family: var(--font-family);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.175rem 0.4rem;
+  border: 1px solid var(--line);
+  margin-top: 0.25rem;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+/* ─── No Results State ─── */
+
+.pub-empty {
+  padding: var(--space-2xl) 0;
+  text-align: center;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+/* ─── Load More Button ─── */
+
+.pub-load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-xl);
+}
+
+.pub-load-more-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding: 1rem 3rem;
+  cursor: pointer;
+  transition: border-color 250ms ease, background-color 250ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pub-load-more-btn:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.pub-load-more-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pub-load-more-hint {
+  text-align: center;
+  margin-top: var(--space-md);
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 768px) {
+  .pub-tabs {
+    gap: var(--space-md);
+  }
+
+  .pub-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pub-link-col {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .pub-tab-btn {
+    font-size: 0.75rem;
+  }
+}

@@ -1,0 +1,237 @@
+/* ==========================================================================
+   Editorial Professional Memberships — Stamp / Seal Grid
+   ========================================================================== */
+
+.memberships-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg); /* Crisp White background to alternate with #FAFAFA */
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.memberships-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Category Group (International vs National) */
+.memberships-group {
+  margin-top: var(--space-2xl);
+}
+
+.memberships-group:first-of-type {
+  margin-top: var(--space-xl);
+}
+
+/* Group Header */
+.memberships-group-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--space-xl);
+}
+
+.memberships-group-title {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.memberships-group-count {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+/* 4-Column Desktop Grid / 2-Column Mobile Grid */
+.memberships-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: var(--grid-gutter);
+  row-gap: var(--space-2xl);
+  width: 100%;
+}
+
+/* Individual Stamp / Seal Item (Strictly NO Cards, NO Colored Badges) */
+.membership-seal-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-lg) var(--space-sm);
+  background: transparent;
+  border: none;
+  cursor: default;
+  outline: none;
+  transition: transform var(--duration-fast) var(--ease-editorial);
+}
+
+/* Focus indicator for keyboard accessibility */
+.membership-seal-item:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+}
+
+/* Central Stamp Container with SVG Outline Draw */
+.membership-seal-graphic {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+}
+
+/* SVG Outline (Circle or Hexagon) */
+.membership-seal-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.membership-seal-path {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.5;
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  transition: stroke-dashoffset 450ms var(--ease-editorial),
+              opacity 300ms ease;
+  opacity: 0.2;
+}
+
+/* On hover or focus-visible: draw stroke around acronym */
+.membership-seal-item:hover .membership-seal-path,
+.membership-seal-item:focus-visible .membership-seal-path {
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+
+/* Organization Acronym in large tracked-out type */
+.membership-acronym {
+  font-family: var(--font-family);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  line-height: 1;
+  transition: transform var(--duration-fast) var(--ease-editorial);
+  z-index: 2;
+}
+
+.membership-seal-item:hover .membership-acronym,
+.membership-seal-item:focus-visible .membership-acronym {
+  transform: scale(1.05);
+}
+
+/* Text Metas Beneath Seal */
+.membership-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  max-width: 240px;
+}
+
+.membership-fullname {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.membership-id-badge {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.membership-type-tag {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Scope & Chapter */
+.membership-location {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .memberships-grid {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--space-lg);
+    row-gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .memberships-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-md);
+    row-gap: var(--space-lg);
+  }
+
+  .membership-seal-graphic {
+    width: 90px;
+    height: 90px;
+  }
+
+  .membership-acronym {
+    font-size: 1.25rem;
+  }
+
+  .membership-fullname {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .memberships-seal-item {
+    padding: var(--space-sm) var(--space-xs);
+  }
+
+  .membership-seal-graphic {
+    width: 80px;
+    height: 80px;
+  }
+
+  .membership-acronym {
+    font-size: 1.125rem;
+  }
+}

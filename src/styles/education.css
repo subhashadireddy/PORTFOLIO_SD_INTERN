@@ -1,0 +1,235 @@
+/* ==========================================================================
+   Editorial Education Section — Academic Ledger / Bookshelf Metaphor
+   ========================================================================== */
+
+.education-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg); /* #FFFFFF */
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.education-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Bookshelf Spine & Ledger Shell */
+.education-ledger-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: var(--space-2xl);
+  border-top: 1px solid var(--line);
+}
+
+/* Optional Left Spine Line Motif with Tick Marks */
+.education-spine-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background-color: var(--line);
+  z-index: 1;
+}
+
+/* Wide Horizontal Ledger Row */
+.education-row {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 200px 1fr 60px;
+  align-items: center;
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--line);
+  background-color: transparent;
+  transition: background-color var(--duration-fast) var(--ease-editorial),
+              border-bottom-color var(--duration-fast) var(--ease-editorial);
+  cursor: default;
+  overflow: hidden;
+}
+
+.education-row:hover {
+  background-color: var(--bg-subtle); /* #FAFAFA */
+  border-bottom-color: rgba(10, 10, 10, 0.22);
+}
+
+/* Tick mark extending from left spine */
+.education-row-tick {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 10px;
+  height: 1px;
+  background-color: var(--line);
+  transform: translateY(-50%);
+  transition: width var(--duration-fast) var(--ease-editorial),
+              background-color var(--duration-fast) var(--ease-editorial);
+}
+
+.education-row:hover .education-row-tick {
+  width: 18px;
+  background-color: var(--text);
+}
+
+/* Left: Oversized Faded Grey Year Typography */
+.education-year-col {
+  position: relative;
+  user-select: none;
+}
+
+.education-year-text {
+  font-family: var(--font-family);
+  font-size: clamp(3.25rem, 5.5vw, 5.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  opacity: 0.22;
+  transition: opacity var(--duration-fast) var(--ease-editorial),
+              transform var(--duration-fast) var(--ease-editorial);
+  display: block;
+}
+
+.education-row:hover .education-year-text {
+  opacity: 0.55;
+  transform: translateX(4px);
+}
+
+/* Right Content: Degree, Specialization, Institution */
+.education-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+.education-degree-title {
+  font-family: var(--font-family);
+  font-size: clamp(1.35rem, 2.2vw, 1.875rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  transition: color var(--duration-fast) var(--ease-editorial);
+}
+
+.education-specialization-text {
+  font-family: var(--font-family);
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.education-institution-text {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.education-research-note {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+/* Far Right: Subtle Animated Editorial Indicator Arrow */
+.education-arrow-col {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.education-row-arrow {
+  font-family: var(--font-family);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity var(--duration-fast) var(--ease-editorial),
+              transform var(--duration-fast) var(--ease-editorial);
+}
+
+.education-row:hover .education-row-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ==========================================================================
+   Responsive Adaptations (Tablet & Mobile)
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .education-row {
+    grid-template-columns: 140px 1fr 40px;
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .education-year-text {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .education-spine-line {
+    display: none;
+  }
+
+  .education-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+    padding: var(--space-lg) 0;
+  }
+
+  .education-row-tick {
+    display: none;
+  }
+
+  .education-year-col {
+    margin-bottom: 0.25rem;
+  }
+
+  .education-year-text {
+    font-size: 2.75rem;
+    opacity: 0.35;
+  }
+
+  .education-content-col {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .education-degree-title {
+    font-size: 1.35rem;
+  }
+
+  .education-arrow-col {
+    display: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .education-year-text,
+  .education-content-col,
+  .education-row-arrow {
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+}

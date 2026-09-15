@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Editorial Current Working Roles — "Another Page" Editorial Spread
+   ========================================================================== */
+
+.current-roles-outer {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg); /* #FFFFFF */
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+
+.current-roles-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-3xl) 0;
+  background-color: var(--bg);
+  will-change: transform, opacity;
+}
+
+.current-roles-container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Page Indicator Watermark / Folio Header */
+.current-roles-folio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--line);
+}
+
+.current-roles-folio-tag {
+  font-family: var(--font-family);
+  font-size: var(--font-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.current-roles-folio-num {
+  font-family: var(--font-family);
+  font-size: var(--font-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+
+/* Two-Column Academic Ledger Grid */
+.current-roles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space-3xl);
+  row-gap: var(--space-xl);
+  width: 100%;
+  margin-top: var(--space-xl);
+}
+
+/* Column Division */
+.current-roles-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-roles-col-title {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Ledger Role Row */
+.current-role-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--line-subtle);
+  transition: transform var(--duration-fast) var(--ease-editorial),
+              border-bottom-color var(--duration-fast) var(--ease-editorial);
+}
+
+.current-role-row:hover {
+  transform: translateX(4px);
+  border-bottom-color: rgba(10, 10, 10, 0.3);
+}
+
+.current-role-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.current-role-period {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.current-role-scope {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.current-role-title {
+  font-family: var(--font-family);
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+
+.current-role-institution {
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.current-role-desc {
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .current-roles-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .current-roles-page {
+    min-height: auto;
+    padding: var(--space-2xl) 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .current-roles-page {
+    padding: var(--space-xl) 0;
+  }
+
+  .current-roles-folio-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .current-role-title {
+    font-size: 1.15rem;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .current-roles-page,
+  .current-role-row {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

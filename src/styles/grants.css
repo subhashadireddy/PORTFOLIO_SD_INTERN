@@ -1,0 +1,328 @@
+/* ==========================================================================
+   Editorial Grants Gallery — Horizontal Scroll-Snap without Borders
+   ========================================================================== */
+
+.grants-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg); /* White background to contrast with Impact Stats (#FAFAFA) */
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+  overflow: hidden;
+}
+
+.grants-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Header & Controls Bar */
+.grants-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+}
+
+.grants-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.grants-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background-color: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-editorial);
+}
+
+.grants-nav-btn:hover:not(:disabled) {
+  background-color: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.grants-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Horizontal Scroll-Snap Gallery Container */
+.grants-gallery-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.grants-gallery-track {
+  display: flex;
+  gap: var(--space-xl);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-lg);
+  cursor: grab;
+  user-select: none;
+}
+
+.grants-gallery-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.grants-gallery-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+/* Individual Grant Item (Strictly NO Cards with Borders) */
+.grant-item {
+  flex: 0 0 clamp(320px, 60vw, 680px);
+  scroll-snap-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(2rem, 4vw, 3.25rem);
+  background-color: transparent;
+  border: none; /* NO BORDERS */
+  box-shadow: none; /* NO SHADOWS */
+  border-radius: 0; /* NO ROUNDED CARDS */
+  opacity: 0.42;
+  transform: scale(0.96);
+  transition: opacity 400ms var(--ease-editorial),
+              transform 400ms var(--ease-editorial),
+              background-color 400ms var(--ease-editorial);
+}
+
+/* Active Item Visual Dominance (Typography scale, subtle background tone shift, full opacity) */
+.grant-item.is-active {
+  opacity: 1;
+  transform: scale(1);
+  background-color: var(--bg-subtle); /* Slight background tone shift (#FAFAFA on #FFFFFF) */
+}
+
+/* Top Meta Row (Category, Year, Role) */
+.grant-item-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--line-subtle);
+  padding-bottom: var(--space-sm);
+}
+
+.grant-category-tag {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.grant-year-badge {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+
+/* Large Grant Amount Display */
+.grant-amount-block {
+  margin-bottom: var(--space-md);
+}
+
+.grant-amount-val {
+  font-family: var(--font-family);
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--text);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.grant-amount-detail {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Grant Title (Large Typography) */
+.grant-title {
+  font-family: var(--font-family);
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: var(--space-md);
+}
+
+/* Funding Body & Scheme Details */
+.grant-meta-block {
+  margin-bottom: var(--space-md);
+}
+
+.grant-agency-name {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 0.2rem;
+}
+
+.grant-scheme-name {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Footer / Context Narrative */
+.grant-context-block {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--line-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.grant-role-pill {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.grant-context-text {
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Horizontal Progress Indicators Below
+   ========================================================================== */
+
+.grants-progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--line);
+}
+
+.grants-dots-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.grants-dot-indicator {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.grants-dot-line {
+  width: 16px;
+  height: 2px;
+  background-color: var(--line);
+  transition: all var(--duration-fast) var(--ease-editorial);
+}
+
+.grants-dot-indicator.is-active .grants-dot-line {
+  width: 28px;
+  background-color: var(--text);
+}
+
+.grants-dot-indicator:hover .grants-dot-line {
+  background-color: var(--text-secondary);
+}
+
+.grants-counter-display {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.grants-counter-current {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .grant-item {
+    flex: 0 0 78vw;
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 600px) {
+  .grant-item {
+    flex: 0 0 88vw;
+    padding: var(--space-md);
+  }
+
+  .grant-amount-val {
+    font-size: 2rem;
+  }
+
+  .grant-title {
+    font-size: 1.2rem;
+  }
+
+  .grants-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .grants-nav-controls {
+    align-self: flex-end;
+  }
+}

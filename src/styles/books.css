@@ -1,0 +1,351 @@
+/* ==========================================================================
+   Books Published — Horizontal Bookshelf Carousel
+   ========================================================================== */
+
+.books-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-warm);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+  overflow: hidden;
+}
+
+.books-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* ─── Shelf Stage ─── */
+.books-shelf-stage {
+  position: relative;
+  width: 100%;
+  margin-top: var(--space-xl);
+  /* Shelf bottom line (physical wooden shelf feel) */
+  border-bottom: 2px solid var(--text);
+  padding-bottom: 0;
+}
+
+/* Horizontal scroll container */
+.books-shelf-track {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.375rem;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 0;
+  /* Allow spine labels to breathe at top */
+  padding-top: 1.5rem;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.books-shelf-track:active {
+  cursor: grabbing;
+}
+
+.books-shelf-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Individual Book Spine ─── */
+.book-spine {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: clamp(52px, 5vw, 68px);
+  height: clamp(200px, 25vw, 300px);
+  background-color: var(--text);
+  color: var(--bg);
+  padding: 1.25rem 0.6rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  transition:
+    height 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    width 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 350ms ease,
+    transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Subtle idle drift animation: assigned per-book via inline style */
+  animation-name: bookIdleDrift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Hover / Focus: grow slightly */
+.book-spine:hover:not(.is-open),
+.book-spine:focus-visible:not(.is-open) {
+  transform: translateY(-6px);
+  background-color: #1a1a1a;
+}
+
+/* Active / Selected spine expands into a panel */
+.book-spine.is-open {
+  width: clamp(260px, 30vw, 380px);
+  height: clamp(260px, 30vw, 360px);
+  background-color: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1.75rem 1.75rem 1.5rem;
+  transform: translateY(-10px);
+  cursor: default;
+  /* Override drift animation when open */
+  animation: none;
+}
+
+/* Pause drift when shelf is interacted with */
+.books-shelf-track.is-paused .book-spine {
+  animation-play-state: paused;
+}
+
+/* Title on closed spine: rotated vertically */
+.book-spine-label {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: var(--font-family);
+  font-size: clamp(0.6rem, 0.85vw, 0.75rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--bg);
+  max-height: 80%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  transition: opacity 200ms ease;
+}
+
+.book-spine.is-open .book-spine-label {
+  display: none;
+}
+
+/* Year at base of closed spine */
+.book-spine-year {
+  font-family: var(--font-family);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.book-spine.is-open .book-spine-year {
+  display: none;
+}
+
+/* Close button on open panel */
+.book-panel-close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  transition: border-color 200ms ease, color 200ms ease;
+  font-family: var(--font-family);
+  line-height: 1;
+}
+
+.book-panel-close:hover {
+  border-color: var(--text-secondary);
+  color: var(--text);
+}
+
+/* Open panel content */
+.book-panel-content {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  padding-right: 1.75rem; /* Avoid overlap with close button */
+  animation: panelFadeIn 300ms cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.book-spine.is-open .book-panel-content {
+  display: flex;
+}
+
+@keyframes panelFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.book-panel-number {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.book-panel-title {
+  font-family: var(--font-family);
+  font-size: clamp(0.9375rem, 1.4vw, 1.0625rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.book-panel-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: auto;
+  border-top: 1px solid var(--line-subtle);
+  padding-top: 0.85rem;
+}
+
+.book-panel-meta-line {
+  font-family: var(--font-family);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.book-panel-meta-key {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-right: 0.35rem;
+}
+
+.book-panel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  margin-top: 0.75rem;
+  transition: opacity 200ms ease;
+}
+
+.book-panel-link:hover {
+  opacity: 0.6;
+}
+
+/* ─── Idle drift keyframes ─── */
+@keyframes bookIdleDrift {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-4px); }
+}
+
+/* ─── Shelf Shadow Line (decorative) ─── */
+.books-shelf-shadow {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.12), transparent);
+  pointer-events: none;
+}
+
+/* ─── Progress Dots ─── */
+.books-progress {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: var(--space-md);
+}
+
+.books-progress-dot {
+  width: 22px;
+  height: 3px;
+  background-color: var(--line);
+  transition: background-color 300ms ease, width 300ms ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.books-progress-dot.is-active {
+  background-color: var(--text);
+  width: 44px;
+}
+
+/* ─── Hint label ─── */
+.books-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--space-md);
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.books-scroll-hint-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--line);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .book-spine {
+    width: 48px;
+    height: 180px;
+  }
+
+  .book-spine.is-open {
+    width: clamp(240px, 75vw, 320px);
+    height: auto;
+    min-height: 240px;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .book-panel-content {
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .books-shelf-track {
+    gap: 0.25rem;
+  }
+
+  .book-spine {
+    width: 42px;
+    height: 160px;
+  }
+
+  .book-spine.is-open {
+    width: clamp(220px, 85vw, 300px);
+  }
+}

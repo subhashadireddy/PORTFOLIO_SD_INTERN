@@ -1,0 +1,359 @@
+/* ==========================================================================
+   Invited Talks / Advisory Roles — Marquee + Accordion Ledger
+   ========================================================================== */
+
+.talks-section-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.talks-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* ─── Marquee Layer ─────────────────────────────────────────────────── */
+
+.talks-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Fade edges */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  padding: var(--space-lg) 0;
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  /* Visually lightweight — a hint of warm grey tone */
+  background-color: var(--bg-subtle);
+}
+
+/* The scrolling track (two copies side by side, GSAP controls x) */
+.talks-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  will-change: transform;
+  white-space: nowrap;
+}
+
+/* Each copy of the item list */
+.talks-marquee-items {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Individual marquee entry */
+.talks-marquee-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0 3.5rem;
+}
+
+.talks-marquee-role {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.talks-marquee-event {
+  font-family: var(--font-family);
+  font-size: clamp(0.9375rem, 1.4vw, 1.125rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+/* Decorative separator between items */
+.talks-marquee-sep {
+  display: inline-block;
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 300;
+  color: var(--line);
+  letter-spacing: 0;
+  padding-left: 3.5rem;
+  user-select: none;
+  /* The ·· bullet separator */
+}
+
+/* Pause state (hover / reduced-motion fallback) */
+.talks-marquee-wrapper.is-paused .talks-marquee-track {
+  animation-play-state: paused;
+}
+
+/* ─── Reduced Motion: static horizontal list ─── */
+@media (prefers-reduced-motion: reduce) {
+  .talks-marquee-wrapper {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .talks-marquee-wrapper::-webkit-scrollbar { display: none; }
+
+  .talks-marquee-track {
+    transform: none !important;   /* Override any GSAP inline transform */
+    animation: none !important;
+  }
+
+  .talks-marquee-items:last-child {
+    display: none; /* Remove duplicate copy on static view */
+  }
+}
+
+/* ─── Accordion Ledger ──────────────────────────────────────────────── */
+
+.talks-ledger-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--line);
+}
+
+.talks-count-label {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Ledger list */
+.talks-ledger {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 1px solid var(--line);
+}
+
+/* Individual Row */
+.talk-row {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid var(--line-subtle);
+  transition: background-color var(--duration-fast) var(--ease-editorial);
+}
+
+.talk-row:hover {
+  background-color: var(--bg-subtle);
+}
+
+.talk-row.is-open {
+  background-color: var(--bg-subtle);
+}
+
+/* Header Button */
+.talk-row-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.125rem, 2.5vw, 1.75rem) clamp(0.75rem, 2vw, 1.25rem);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+.talk-row-header:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: -2px;
+}
+
+.talk-row-left {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 3vw, 3rem);
+  flex: 1;
+  min-width: 0;
+}
+
+/* Date / Year column */
+.talk-date {
+  font-family: var(--font-family);
+  font-size: clamp(0.8125rem, 1.2vw, 1rem);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  min-width: 7rem;
+  flex-shrink: 0;
+  transition: transform 350ms var(--ease-editorial),
+              color 350ms var(--ease-editorial),
+              font-weight 300ms ease;
+}
+
+.talk-row.is-open .talk-date {
+  transform: translateX(-4px);
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Event name (primary label) */
+.talk-event-name {
+  font-family: var(--font-family);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  min-width: 0;
+  transition: font-weight 250ms ease;
+}
+
+.talk-row:hover .talk-event-name,
+.talk-row.is-open .talk-event-name {
+  font-weight: 600;
+}
+
+/* Role badge: text-only, no pill */
+.talk-role-tag {
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: var(--space-sm);
+  transition: color 250ms ease;
+}
+
+.talk-row:hover .talk-role-tag,
+.talk-row.is-open .talk-role-tag {
+  color: var(--text-secondary);
+}
+
+/* Toggle Icon */
+.talk-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  transition: transform 350ms var(--ease-editorial),
+              color 250ms ease;
+}
+
+.talk-row:hover .talk-toggle-icon {
+  color: var(--text);
+}
+
+.talk-row.is-open .talk-toggle-icon {
+  transform: rotate(45deg);
+  color: var(--text);
+}
+
+/* Expandable Details (CSS Grid height animation) */
+.talk-details-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 400ms var(--ease-editorial);
+}
+
+.talk-row.is-open .talk-details-wrapper {
+  grid-template-rows: 1fr;
+}
+
+.talk-details-inner {
+  overflow: hidden;
+}
+
+.talk-details-content {
+  padding-left: calc(clamp(0.75rem, 2vw, 1.25rem) + clamp(1rem, 3vw, 3rem) + 7rem);
+  padding-right: clamp(0.75rem, 2vw, 1.25rem);
+  padding-bottom: clamp(1.25rem, 3vw, 2rem);
+  padding-top: 0.1rem;
+}
+
+.talk-host {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
+}
+
+.talk-topic {
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 760px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .talk-details-content {
+    padding-left: clamp(0.75rem, 2vw, 1.25rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .talks-ledger-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .talk-row-left {
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+  }
+
+  .talk-date {
+    font-size: 0.75rem;
+    min-width: unset;
+  }
+
+  .talk-event-name {
+    font-size: 0.9375rem;
+  }
+
+  .talk-role-tag {
+    display: none; /* Role shown in expanded content on mobile */
+  }
+
+  .talk-details-content {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 1.25rem;
+  }
+}
