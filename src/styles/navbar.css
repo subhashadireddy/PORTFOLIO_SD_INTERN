@@ -13,11 +13,26 @@
   background-color: transparent;
   border-bottom: 1px solid transparent;
   transition:
-    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
     opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
     background-color 300ms var(--ease-editorial),
     border-bottom-color 300ms var(--ease-editorial);
+  /* transform is animated exclusively by GSAP — no CSS transition for it */
   will-change: transform, opacity, background-color;
+}
+
+/* ── Hover-reveal zone: invisible strip at the very top of the viewport ──────
+   Only active on desktop. pointer-events are toggled by JS.
+   Position it ABOVE the navbar z-layer so it catches mouse without
+   intercepting navbar clicks when visible. */
+.navbar-hover-zone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 12px; /* ~12 px invisible strip */
+  z-index: calc(var(--z-nav) + 1);
+  pointer-events: none; /* starts non-interactive; JS enables when nav is hidden */
+  background: transparent;
 }
 
 /* Initial preloaded state */
@@ -276,6 +291,11 @@
      since there are no nav links on mobile */
   .navbar-links {
     padding-right: 0;
+  }
+
+  /* Hover-reveal zone is a desktop-only feature */
+  .navbar-hover-zone {
+    display: none;
   }
 }
 
