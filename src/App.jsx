@@ -3,6 +3,7 @@ import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import Navbar from './components/Navbar';
+import FloatingMenuButton from './components/FloatingMenuButton';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 // 18 Sections in Exact Required Order
@@ -27,6 +28,8 @@ import ContactFooter from './sections/ContactFooter';
 
 export default function App() {
   const [isHeroRevealed, setIsHeroRevealed] = useState(false);
+  // Shared menu state — used by both Navbar overlay and FloatingMenuButton
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Initialize global smooth scroll reveals
   useScrollReveal();
@@ -49,7 +52,20 @@ export default function App() {
       <Preloader onRevealHero={handleRevealHero} />
       <CustomCursor />
       <ScrollProgressBar />
-      <Navbar isLoaded={isHeroRevealed} />
+
+      {/* Fixed Floating Hamburger — always visible, all viewports */}
+      <FloatingMenuButton
+        isOpen={mobileMenuOpen}
+        onToggle={() => setMobileMenuOpen((prev) => !prev)}
+        isLoaded={isHeroRevealed}
+      />
+
+      {/* Navbar with shared overlay state */}
+      <Navbar
+        isLoaded={isHeroRevealed}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+      />
 
       {/* Main Exhibition Sections */}
       <main className={`portfolio-main ${isHeroRevealed ? 'is-loaded' : ''}`}>

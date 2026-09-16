@@ -1,5 +1,6 @@
 /* ==========================================================================
    Editorial Fixed Navbar & Mobile Full-Screen Overlay
+   The floating hamburger button is now in floating-menu.css.
    ========================================================================== */
 
 .navbar-fixed {
@@ -11,10 +12,11 @@
   z-index: var(--z-nav);
   background-color: transparent;
   border-bottom: 1px solid transparent;
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 300ms var(--ease-editorial),
-              border-bottom-color 300ms var(--ease-editorial);
+  transition:
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 300ms var(--ease-editorial),
+    border-bottom-color 300ms var(--ease-editorial);
   will-change: transform, opacity, background-color;
 }
 
@@ -36,11 +38,6 @@
   -webkit-backdrop-filter: blur(12px);
   border-bottom-color: var(--line);
   box-shadow: none !important; /* Strict requirement: NO box shadow */
-}
-
-/* Scroll Hiding State */
-.navbar-fixed.is-hidden {
-  transform: translateY(-100%) !important;
 }
 
 .navbar-container {
@@ -88,6 +85,8 @@
   align-items: center;
   gap: var(--space-xl);
   list-style: none;
+  /* Ensure nav links don't overlap with the floating button */
+  padding-right: 3.5rem;
 }
 
 .navbar-link-item {
@@ -132,30 +131,11 @@
   outline-offset: 4px;
 }
 
-/* Mobile Toggle Trigger */
-.navbar-mobile-toggle {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  font-family: var(--font-family);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: opacity 200ms var(--ease-editorial);
-}
-
-.navbar-mobile-toggle:hover {
-  opacity: 0.7;
-}
-
 /* ==========================================================================
    Full-Screen Mobile Editorial Menu Overlay
+   z-index must be above FloatingMenuButton (9000) so overlay covers it,
+   but the FloatingMenuButton renders above via its own z-index=9000
+   and the overlay is z-index 8500 so the button stays on top to close.
    ========================================================================== */
 
 .mobile-overlay-menu {
@@ -164,7 +144,7 @@
   width: 100vw;
   height: 100vh;
   background-color: var(--bg);
-  z-index: calc(var(--z-nav) + 10);
+  z-index: 8500; /* below floating button so button stays clickable to close */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -172,8 +152,9 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 350ms var(--ease-editorial),
-              visibility 350ms var(--ease-editorial);
+  transition:
+    opacity 350ms var(--ease-editorial),
+    visibility 350ms var(--ease-editorial);
 }
 
 .mobile-overlay-menu.is-open {
@@ -201,6 +182,8 @@
   color: var(--text);
   padding: 0.5rem 0.75rem;
   cursor: pointer;
+  background: none;
+  border: none;
 }
 
 /* Mobile Navigation List */
@@ -229,8 +212,9 @@
   position: relative;
   transform: translateY(100%);
   opacity: 0;
-  transition: transform 450ms var(--ease-editorial),
-              opacity 450ms var(--ease-editorial);
+  transition:
+    transform 450ms var(--ease-editorial),
+    opacity 450ms var(--ease-editorial);
 }
 
 .mobile-overlay-menu.is-open .mobile-nav-link {
@@ -282,12 +266,16 @@
   align-items: flex-end;
 }
 
+/* Hide desktop nav links on mobile — floating button handles menu */
 @media (max-width: 860px) {
   .navbar-links {
     display: none;
   }
-  .navbar-mobile-toggle {
-    display: flex;
+
+  /* Remove the padding-right used to avoid overlap with floating button
+     since there are no nav links on mobile */
+  .navbar-links {
+    padding-right: 0;
   }
 }
 

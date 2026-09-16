@@ -1,167 +1,77 @@
 /* ==========================================================================
-   Editorial About Section — Pinned Signature Orbit Sequence
+   About Section — Two-Column: Research Viz (Left) + Biography (Right)
+   Old orbit/portrait animation removed.
    ========================================================================== */
 
-.about-pinned-outer {
+.about-section {
   position: relative;
   width: 100%;
   background-color: var(--bg-subtle);
+  padding: var(--space-2xl) 0;
 }
 
-.about-pinned-stage {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+/* Two-column grid */
+.about-grid {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  align-items: center;
+  gap: var(--space-2xl);
+  min-height: 70vh;
+}
+
+/* ── LEFT: Visualization Column ───────────────────────────────────────── */
+.about-viz-col {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-subtle); /* #FAFAFA */
+  padding: var(--space-md) 0;
 }
 
-/* Background watermark section counter */
-.about-bg-counter {
-  position: absolute;
-  top: 6%;
-  left: var(--container-padding);
+/* ── RIGHT: Content Column ────────────────────────────────────────────── */
+.about-content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+/* Eyebrow */
+.about-eyebrow {
   font-family: var(--font-family);
   font-size: var(--font-eyebrow);
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-muted);
-  z-index: 5;
-}
-
-/* Central Stage Arena for Orbit Animation (Desktop) */
-.about-arena {
-  position: relative;
-  width: 100%;
-  max-width: var(--container-max-width);
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 var(--container-padding);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* The Animated Portrait (Starts Centered, then Docks Left) */
-.about-portrait-anchor {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 320px;
-  height: 400px;
-  z-index: 10;
-  pointer-events: none;
-  will-change: transform, opacity, width, left, top;
-}
-
-.about-portrait-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  border-radius: 16px; /* Soft natural organic edge without card border */
-  filter: grayscale(100%) contrast(106%);
   display: block;
 }
 
-/* Orbiting Words Container */
-.about-orbit-wrapper {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 15;
-}
-
-.about-orbit-word {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-family: var(--font-family);
-  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  white-space: nowrap;
-  pointer-events: none;
-  transform-origin: center center;
-  will-change: transform, opacity;
-}
-
-/* Settled Docked Layout (Revealed in Stage 3 & 4) */
-.about-settled-grid {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  max-width: var(--container-max-width);
-  margin: 0 auto;
-  padding: calc(var(--navbar-height) + var(--space-md)) var(--container-padding) var(--space-lg);
-  display: grid;
-  grid-template-columns: 34% 66%;
-  align-items: center;
-  gap: var(--space-xl);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 20;
-}
-
-.about-settled-grid.is-interactive {
-  pointer-events: all;
-}
-
-/* Left Dock Column Placeholder (Image occupies this space visually) */
-.about-settled-left {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-/* Right Content Column: Settled Heading + Biography + Typographic Stats */
-.about-settled-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: var(--space-md);
-}
-
-.about-settled-heading-wrap {
-  margin-bottom: var(--space-md);
-}
-
-.about-settled-eyebrow {
-  font-family: var(--font-family);
-  font-size: var(--font-eyebrow);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  margin-bottom: 0.35rem;
-  display: block;
-}
-
-.about-settled-heading {
+/* Heading */
+.about-heading {
   font-family: var(--font-family);
   font-size: clamp(2rem, 3.8vw, 3.5rem);
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.03em;
   color: var(--text);
+  margin-top: 0.25rem;
 }
 
+/* Role subtitle */
+.about-role {
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Biography narrative */
 .about-bio-narrative {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  margin-bottom: var(--space-xl);
   max-width: 48rem;
 }
 
@@ -180,13 +90,14 @@
   color: var(--text-secondary);
 }
 
-/* Typographic Statistics (NO Card Boxes, Pure Whitespace & Type) */
+/* Typographic Statistics */
 .about-stats-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-lg);
   padding-top: var(--space-lg);
   border-top: 1px solid var(--line);
+  margin-top: var(--space-sm);
 }
 
 .about-stat-item {
@@ -216,47 +127,13 @@
 }
 
 /* ==========================================================================
-   Mobile Layout (ScrollTrigger Pinning & Orbit Disabled for Mobile)
+   Responsive: Tablet (≤ 1024px) — reduce viz size, keep two columns
    ========================================================================== */
 
-.about-mobile-flow {
-  display: none;
-  width: 100%;
-  padding: var(--space-2xl) var(--container-padding);
-}
-
-@media (max-width: 960px) {
-  .about-pinned-stage {
-    display: none !important;
-  }
-
-  .about-mobile-flow {
-    display: flex;
-    flex-direction: column;
+@media (max-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 40% 1fr;
     gap: var(--space-xl);
-  }
-
-  .about-mobile-portrait-wrap {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-
-  .about-mobile-portrait {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4/5;
-    object-fit: cover;
-    border-radius: 16px;
-    filter: grayscale(100%) contrast(106%);
-  }
-
-  .about-mobile-heading {
-    font-size: clamp(2rem, 7vw, 2.75rem);
-    line-height: 1.1;
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-sm);
   }
 
   .about-stats-row {
@@ -265,9 +142,56 @@
   }
 }
 
-/* Accessibility: Reduced Motion */
+/* ==========================================================================
+   Responsive: Mobile (≤ 768px) — stack vertically, viz below text
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: var(--space-xl) 0;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    min-height: auto;
+  }
+
+  /* On mobile: content first, viz second */
+  .about-viz-col {
+    order: 2;
+    max-width: 360px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .about-content-col {
+    order: 1;
+    gap: var(--space-sm);
+  }
+
+  .about-heading {
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    line-height: 1.1;
+  }
+
+  .about-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .about-stat-number {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+}
+
+/* ==========================================================================
+   Accessibility: Reduced Motion
+   ========================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
-  .about-orbit-word {
-    transform: none !important;
+  .about-section * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
 }

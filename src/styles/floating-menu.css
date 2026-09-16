@@ -1,0 +1,151 @@
+/* ==========================================================================
+   Floating Fixed Hamburger Menu Button
+   Always visible, top-right corner, icon only — no text.
+   ========================================================================== */
+
+.floating-menu-btn {
+  /* Fixed positioning — never scrolls away */
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  z-index: 9000; /* above everything including the overlay header */
+
+  /* Size & shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  padding: 0;
+
+  /* Monochrome glass pill */
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+
+  /* Entrance transition */
+  opacity: 0;
+  transform: scale(0.85);
+  transition:
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 200ms ease,
+    box-shadow 200ms ease;
+
+  will-change: transform, opacity;
+}
+
+/* Entrance: becomes visible after preloader */
+.floating-menu-btn.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hover state */
+.floating-menu-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  transform: scale(1.06);
+}
+
+.floating-menu-btn:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+/* Active state when overlay is open: darker pill */
+.floating-menu-btn.is-open {
+  background-color: var(--text);
+  border-color: var(--text);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* ==========================================================================
+   Hamburger Icon — Three bars that animate to ✕
+   ========================================================================== */
+
+.floating-menu-icon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 14px;
+}
+
+.floating-menu-bar {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  border-radius: 2px;
+  background-color: var(--text);
+  transition:
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 200ms ease,
+    top 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center center;
+}
+
+/* Normal hamburger positions */
+.bar-top { top: 0; }
+.bar-mid { top: 50%; transform: translateY(-50%); }
+.bar-bot { top: 100%; transform: translateY(-100%); }
+
+/* When open: bars invert to white and rotate to ✕ */
+.floating-menu-btn.is-open .floating-menu-bar {
+  background-color: #ffffff;
+}
+
+.floating-menu-btn.is-open .bar-top {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.floating-menu-btn.is-open .bar-mid {
+  opacity: 0;
+  transform: translateY(-50%) scaleX(0);
+}
+
+.floating-menu-btn.is-open .bar-bot {
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* ==========================================================================
+   MOBILE ONLY — hidden on desktop/tablet (≥861px)
+   The 860px breakpoint matches the existing navbar responsive system.
+   ========================================================================== */
+
+/* Desktop/Tablet: completely remove the floating button */
+@media (min-width: 861px) {
+  .floating-menu-btn {
+    display: none !important;
+  }
+}
+
+/* Mobile: ensure it is visible and positioned correctly */
+@media (max-width: 860px) {
+  .floating-menu-btn {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-menu-btn,
+  .floating-menu-bar {
+    transition-duration: 0.001ms !important;
+  }
+}
+

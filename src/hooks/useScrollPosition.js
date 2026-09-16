@@ -13,7 +13,7 @@ export function useScrollPosition() {
       const currentScrollY = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (currentScrollY / docHeight) * 100 : 0;
-      
+
       setScrollProgress(progress);
 
       const pastHero = currentScrollY > 120;

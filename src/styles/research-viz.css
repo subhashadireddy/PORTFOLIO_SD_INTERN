@@ -1,0 +1,76 @@
+/* ==========================================================================
+   Research Visualization — Premium Gait Analysis SVG
+   Single central anatomical figure with sensor overlay.
+   ========================================================================== */
+
+.research-viz-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Ensure animation never escapes and never covers the mobile menu */
+  overflow: visible;
+  z-index: 0;
+}
+
+.research-viz-svg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  color: var(--text);
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* Animatable element groups — GSAP targets */
+.rv-body    { will-change: stroke-dashoffset, opacity; }
+.rv-joint   { will-change: transform, opacity; }
+.rv-data-line { will-change: stroke-dashoffset, opacity; }
+.rv-wave    { will-change: stroke-dashoffset, opacity; }
+.rv-particle{ will-change: cx, cy, opacity; }
+.rv-grid    { will-change: opacity; }
+.rv-label   { will-change: opacity, transform; }
+
+/* ==========================================================================
+   Reduced Motion — Static Fallback
+   All elements visible at rest; no animation.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .rv-body,
+  .rv-data-line,
+  .rv-wave {
+    stroke-dashoffset: 0 !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .rv-joint {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .rv-grid  { opacity: 0.12 !important; }
+  .rv-label { opacity: 1 !important; transform: none !important; }
+  .rv-particle { opacity: 0 !important; } /* particles hidden in reduced-motion */
+}
+
+/* ==========================================================================
+   Mobile sizing — prevent overflow, scale naturally
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .research-viz-svg {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .research-viz-svg {
+    max-width: 260px;
+  }
+}
