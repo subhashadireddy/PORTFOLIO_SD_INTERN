@@ -70,7 +70,7 @@ export default function Memberships() {
         />
 
         {/* Group 1: International Professional Bodies */}
-        <div className="memberships-group">
+        <div className="memberships-group reveal-on-scroll">
           <div className="memberships-group-header">
             <h3 className="memberships-group-title">
               <span>Professional Body — International</span>
@@ -80,7 +80,7 @@ export default function Memberships() {
             </span>
           </div>
 
-          <div className="memberships-grid" role="list">
+          <div className="memberships-grid reveal-stagger" role="list">
             {membershipsData.international.map((item, index) => (
               <MembershipSeal
                 key={item.id}
@@ -92,7 +92,7 @@ export default function Memberships() {
         </div>
 
         {/* Group 2: National Professional Bodies */}
-        <div className="memberships-group">
+        <div className="memberships-group reveal-on-scroll">
           <div className="memberships-group-header">
             <h3 className="memberships-group-title">
               <span>Professional Body — National</span>
@@ -102,7 +102,7 @@ export default function Memberships() {
             </span>
           </div>
 
-          <div className="memberships-grid" role="list">
+          <div className="memberships-grid reveal-stagger" role="list">
             {membershipsData.national.map((item, index) => (
               <MembershipSeal
                 key={item.id}

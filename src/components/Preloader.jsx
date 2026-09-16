@@ -5,7 +5,7 @@ import { prefersReducedMotion } from '../utils/animations';
 const NAME_WORDS = ['Dr.', 'Achanta', 'Sampath', 'Dakshina', 'Murthy'];
 
 export default function Preloader({ onRevealHero }) {
-  const [stage, setStage] = useState('entering'); // 'entering' -> 'active' -> 'wiping' -> 'done'
+  const [stage, setStage] = useState('entering'); // 'entering' -> 'active' -> 'fading' -> 'wiping' -> 'done'
   const onRevealHeroRef = useRef(onRevealHero);
   onRevealHeroRef.current = onRevealHero;
 
@@ -22,19 +22,25 @@ export default function Preloader({ onRevealHero }) {
       setStage('active');
     }, 80);
 
-    // Stage 2: Display for 3.0 seconds total, then initiate upward wipe & reveal Hero
+    // Stage 2: Gently fade out preloader content before the veil lifts
+    const tFade = setTimeout(() => {
+      setStage('fading');
+    }, 2300);
+
+    // Stage 3: Smooth curtain wipe upward with simultaneous soft fade, signal Hero reveal
     const tWipe = setTimeout(() => {
       setStage('wiping');
       if (onRevealHeroRef.current) onRevealHeroRef.current();
-    }, 3000);
+    }, 2700);
 
-    // Stage 3: After wipe transition finishes (0.8s), completely unmount from DOM
+    // Stage 4: After wipe & fade transitions settle, completely unmount from DOM
     const tDone = setTimeout(() => {
       setStage('done');
-    }, 3850);
+    }, 3650);
 
     return () => {
       clearTimeout(tActive);
+      clearTimeout(tFade);
       clearTimeout(tWipe);
       clearTimeout(tDone);
     };
@@ -44,9 +50,9 @@ export default function Preloader({ onRevealHero }) {
 
   return (
     <aside
-      className={`preloader-overlay ${stage === 'active' || stage === 'wiping' ? 'is-active' : ''} ${
-        stage === 'wiping' ? 'is-wiping' : ''
-      }`}
+      className={`preloader-overlay ${
+        stage === 'active' || stage === 'fading' || stage === 'wiping' ? 'is-active' : ''
+      } ${stage === 'fading' ? 'is-fading' : ''} ${stage === 'wiping' ? 'is-wiping' : ''}`}
       aria-label="Loading Dr. Achanta Sampath Dakshina Murthy Portfolio"
       aria-live="polite"
     >

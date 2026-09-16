@@ -3,6 +3,7 @@ import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import Navbar from './components/Navbar';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 // 18 Sections in Exact Required Order
 import Hero from './sections/Hero';
@@ -27,6 +28,9 @@ import ContactFooter from './sections/ContactFooter';
 export default function App() {
   const [isHeroRevealed, setIsHeroRevealed] = useState(false);
 
+  // Initialize global smooth scroll reveals
+  useScrollReveal();
+
   const handleRevealHero = useCallback(() => {
     setIsHeroRevealed(true);
   }, []);
@@ -35,7 +39,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsHeroRevealed(true);
-    }, 3200);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -45,10 +49,10 @@ export default function App() {
       <Preloader onRevealHero={handleRevealHero} />
       <CustomCursor />
       <ScrollProgressBar />
-      <Navbar />
+      <Navbar isLoaded={isHeroRevealed} />
 
       {/* Main Exhibition Sections */}
-      <main>
+      <main className={`portfolio-main ${isHeroRevealed ? 'is-loaded' : ''}`}>
         <Hero isLoaded={isHeroRevealed} />
         <About />
         <Education />

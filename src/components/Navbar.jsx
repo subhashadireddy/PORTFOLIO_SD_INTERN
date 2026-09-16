@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { label: 'Contact', href: '#contact', number: '06' }
 ];
 
-export default function Navbar() {
+export default function Navbar({ isLoaded = true }) {
   const { isScrolledPastHero, isNavbarVisible } = useScrollPosition();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -46,7 +46,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`navbar-fixed ${isScrolledPastHero ? 'is-scrolled' : ''} ${
+        className={`navbar-fixed ${isLoaded ? 'is-mounted' : 'is-unmounted'} ${isScrolledPastHero ? 'is-scrolled' : ''} ${
           !isNavbarVisible && !mobileMenuOpen ? 'is-hidden' : ''
         }`}
         aria-label="Main Editorial Navigation"

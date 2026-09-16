@@ -255,7 +255,7 @@ export default function About() {
 
       {/* MOBILE FLOW (Simplified Sequential Hierarchy, Pinning Disabled) */}
       <div className="about-mobile-flow">
-        <div>
+        <div className="reveal-on-scroll">
           <span className="font-eyebrow" style={{ color: 'var(--text-secondary)' }}>
             02 / PROFILE &amp; ACADEMIC VISION
           </span>
@@ -264,7 +264,7 @@ export default function About() {
           </h2>
         </div>
 
-        <div className="about-mobile-portrait-wrap">
+        <div className="about-mobile-portrait-wrap reveal-on-scroll">
           <img
             src={portraitImg}
             alt="Dr. Achanta Sampath Dakshina Murthy"
@@ -272,7 +272,7 @@ export default function About() {
           />
         </div>
 
-        <div className="about-bio-narrative">
+        <div className="about-bio-narrative reveal-on-scroll">
           <p className="about-bio-lead">
             Senior Associate Professor and Head, Vignan&apos;s Centre for Innovations &amp; Startups (VCIS) with over 10 years of teaching and institutional leadership experience.
           </p>
@@ -281,7 +281,7 @@ export default function About() {
           </p>
         </div>
 
-        <div className="about-stats-row">
+        <div className="about-stats-row reveal-on-scroll reveal-stagger">
           <div className="about-stat-item">
             <span className="about-stat-number">10+</span>
             <span className="about-stat-label">Yrs Teaching</span>

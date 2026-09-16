@@ -50,7 +50,7 @@ export default function Awards() {
           />
 
           {/* Minimalist Filter Tabs (Typography + Animated Underline) */}
-          <div className="awards-filter-group" role="tablist" aria-label="Filter awards by period">
+          <div className="awards-filter-group reveal-on-scroll" role="tablist" aria-label="Filter awards by period">
             <button
               type="button"
               className={`awards-filter-btn ${filter === 'recent' ? 'is-active' : ''}`}
@@ -82,7 +82,7 @@ export default function Awards() {
         </div>
 
         {/* Accordion Ledger (Rows with hairline separators) */}
-        <div id="awards-ledger-list" className="awards-ledger" role="region" aria-label="Awards ledger">
+        <div id="awards-ledger-list" className="awards-ledger reveal-on-scroll" role="region" aria-label="Awards ledger">
           {filteredAwards.map((award) => {
             const isOpen = openIds.has(award.id);
 

@@ -33,7 +33,7 @@ export default function Hero({ isLoaded = true }) {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { ease: 'power3.out' },
-        delay: 0.1
+        delay: 0.28 // Coordinates perfectly with the upward curtain sweep
       });
 
       // Eyebrow reveal
@@ -41,7 +41,7 @@ export default function Hero({ isLoaded = true }) {
         tl.fromTo(
           eyebrowRef.current,
           { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.8 }
+          { opacity: 1, y: 0, duration: 0.85 }
         );
       }
 
@@ -51,7 +51,7 @@ export default function Hero({ isLoaded = true }) {
         tl.fromTo(
           wordsLine1,
           { y: '115%' },
-          { y: '0%', duration: 1.0, stagger: 0.08 },
+          { y: '0%', duration: 1.1, stagger: 0.09 },
           '-=0.6'
         );
       }
@@ -62,8 +62,8 @@ export default function Hero({ isLoaded = true }) {
         tl.fromTo(
           wordsLine2,
           { y: '115%' },
-          { y: '0%', duration: 1.0, stagger: 0.08 },
-          '-=0.75'
+          { y: '0%', duration: 1.1, stagger: 0.09 },
+          '-=0.8'
         );
       }
 
@@ -72,8 +72,8 @@ export default function Hero({ isLoaded = true }) {
         tl.fromTo(
           statementRef.current,
           { opacity: 0, y: 22 },
-          { opacity: 1, y: 0, duration: 0.9 },
-          '-=0.6'
+          { opacity: 1, y: 0, duration: 1.0 },
+          '-=0.65'
         );
       }
 
@@ -82,17 +82,17 @@ export default function Hero({ isLoaded = true }) {
         tl.fromTo(
           metaRef.current,
           { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          '-=0.6'
+          { opacity: 1, y: 0, duration: 0.9 },
+          '-=0.65'
         );
       }
 
-      // Portrait: starts scaled up at 105%, un-clips, and settles with luxury easing
+      // Portrait: starts scaled up at 106%, un-clips, and settles with luxury easing
       if (portraitImgRef.current) {
         tl.fromTo(
           portraitImgRef.current,
           {
-            scale: 1.05,
+            scale: 1.06,
             opacity: 0,
             clipPath: 'inset(8% 0% 0% 0%)'
           },
@@ -100,10 +100,10 @@ export default function Hero({ isLoaded = true }) {
             scale: 1,
             opacity: 1,
             clipPath: 'inset(0% 0% 0% 0%)',
-            duration: 1.3,
+            duration: 1.4,
             ease: 'power3.out'
           },
-          0.3
+          0.35
         );
       }
 
@@ -111,9 +111,9 @@ export default function Hero({ isLoaded = true }) {
       if (scrollCueRef.current) {
         tl.fromTo(
           scrollCueRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.9 },
-          '-=0.4'
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.9 },
+          '-=0.45'
         );
       }
 

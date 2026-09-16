@@ -322,7 +322,7 @@ export default function Certifications() {
         />
 
         {/* Stats bar */}
-        <div className="cert-stats-bar" aria-label="Credential summary">
+        <div className="cert-stats-bar reveal-on-scroll reveal-stagger" aria-label="Credential summary">
           <div className="cert-stat-item">
             <span className="cert-stat-value">{stats.onlineCertifications}</span>
             <span className="cert-stat-label">Online Certifications</span>
@@ -342,10 +342,12 @@ export default function Certifications() {
         </div>
 
         {/* Passport stamp strip */}
-        <PassportStrip />
+        <div className="reveal-on-scroll">
+          <PassportStrip />
+        </div>
 
         {/* "View all" CTA */}
-        <div className="cert-view-all-wrapper">
+        <div className="cert-view-all-wrapper reveal-on-scroll">
           <button
             type="button"
             className="cert-view-all-btn"

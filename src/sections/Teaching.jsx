@@ -32,7 +32,7 @@ function ProjectLedger({ projects, summary }) {
   const sorted = [...projects].sort((a, b) => Number(b.year) - Number(a.year));
 
   return (
-    <div className="teaching-projects-section">
+    <div className="teaching-projects-section reveal-on-scroll">
       <div className="teaching-projects-header">
         <span className="teaching-projects-title">
           Student Projects Guided
@@ -107,7 +107,7 @@ export default function Teaching() {
         />
 
         {/* Two-column chalkboard grid */}
-        <div className="teaching-body">
+        <div className="teaching-body reveal-on-scroll">
           <WordGrid
             items={teachingData.subjects}
             label={`Subjects Taught · ${teachingData.subjects.length}`}

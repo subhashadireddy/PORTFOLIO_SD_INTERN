@@ -11,10 +11,22 @@
   z-index: var(--z-nav);
   background-color: transparent;
   border-bottom: 1px solid transparent;
-  transition: transform 300ms var(--ease-editorial),
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 300ms var(--ease-editorial),
               border-bottom-color 300ms var(--ease-editorial);
-  will-change: transform, background-color;
+  will-change: transform, opacity, background-color;
+}
+
+/* Initial preloaded state */
+.navbar-fixed.is-unmounted {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.navbar-fixed.is-mounted {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 /* Scrolled Past Hero State */
@@ -28,7 +40,7 @@
 
 /* Scroll Hiding State */
 .navbar-fixed.is-hidden {
-  transform: translateY(-100%);
+  transform: translateY(-100%) !important;
 }
 
 .navbar-container {
@@ -284,5 +296,9 @@
   .mobile-overlay-menu,
   .mobile-nav-link {
     transition-duration: 0.001ms !important;
+  }
+  .navbar-fixed.is-unmounted {
+    transform: none !important;
+    opacity: 1 !important;
   }
 }

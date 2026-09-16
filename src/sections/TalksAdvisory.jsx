@@ -253,17 +253,19 @@ export default function TalksAdvisory() {
         />
 
         {/* ── Layer 1: Decorative Marquee ── */}
-        <TalksMarquee />
+        <div className="reveal-on-scroll">
+          <TalksMarquee />
+        </div>
 
         {/* ── Layer 2: Accordion Ledger ── */}
-        <div className="talks-ledger-header">
+        <div className="talks-ledger-header reveal-on-scroll">
           <p className="talks-count-label">
             {talksAdvisoryData.length} Engagements · 2018 – Present
           </p>
         </div>
 
         <div
-          className="talks-ledger"
+          className="talks-ledger reveal-on-scroll"
           role="list"
           aria-label="Talks and advisory engagements"
         >

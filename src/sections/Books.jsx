@@ -225,7 +225,7 @@ export default function Books() {
         />
 
         {/* Shelf Stage */}
-        <div className="books-shelf-stage" aria-label="Bookshelf">
+        <div className="books-shelf-stage reveal-on-scroll" aria-label="Bookshelf">
           {/* Horizontal scrollable track */}
           <div
             ref={trackRef}
@@ -266,7 +266,7 @@ export default function Books() {
         </p>
 
         {/* Progress dots (one per book) */}
-        <nav className="books-progress" aria-label="Book navigation">
+        <nav className="books-progress reveal-on-scroll" aria-label="Book navigation">
           {booksData.map((book, i) => (
             <button
               key={book.id}

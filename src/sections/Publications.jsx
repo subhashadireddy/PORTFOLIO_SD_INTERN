@@ -258,7 +258,7 @@ export default function Publications() {
         />
 
         {/* ── Controls ── */}
-        <div className="pub-controls">
+        <div className="pub-controls reveal-on-scroll">
           {/* Search */}
           <div className="pub-search-wrapper">
             <span className="pub-search-icon" aria-hidden="true">
@@ -302,11 +302,11 @@ export default function Publications() {
           />
         </div>
 
-        {/* ── Results Meta ── */}
-        <div className="pub-meta-row" aria-live="polite" aria-atomic="true">
-          <span className="pub-result-count">
-            {filtered.length === 0
-              ? 'No results'
+        {/* ── Meta bar: count + reset ── */}
+        <div className="pub-meta-bar reveal-on-scroll" aria-live="polite">
+          <span className="pub-count-label">
+            {query
+              ? `${filtered.length} result${filtered.length !== 1 ? 's' : ''} for “${query}”`
               : `Showing ${Math.min(visibleCount, filtered.length)} of ${filtered.length} publication${filtered.length !== 1 ? 's' : ''}`}
           </span>
         </div>

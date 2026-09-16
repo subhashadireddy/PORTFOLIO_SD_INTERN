@@ -133,7 +133,7 @@ export default function Grants() {
           />
 
           {/* Desktop Arrow Controls */}
-          <div className="grants-nav-controls" aria-label="Gallery Controls">
+          <div className="grants-nav-controls reveal-on-scroll" aria-label="Gallery Controls">
             <button
               type="button"
               className="grants-nav-btn"
@@ -158,7 +158,7 @@ export default function Grants() {
         </div>
 
         {/* Horizontal Scroll-Snap Gallery (No Cards, No Borders) */}
-        <div className="grants-gallery-wrapper">
+        <div className="grants-gallery-wrapper reveal-on-scroll">
           <div
             ref={trackRef}
             className="grants-gallery-track"

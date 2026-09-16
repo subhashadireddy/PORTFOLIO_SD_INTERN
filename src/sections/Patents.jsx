@@ -194,7 +194,7 @@ export default function Patents() {
         {/* Segmented Tab Bar */}
         <div
           ref={tabBarRef}
-          className="patents-tab-bar"
+          className="patents-tab-bar reveal-on-scroll"
           role="tablist"
           aria-label="Patent categories"
         >

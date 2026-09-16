@@ -8,7 +8,7 @@ export default function SectionHeader({
   className = ''
 }) {
   return (
-    <header className={`section-header-block ${className}`} style={{ marginBottom: 'var(--space-xl)' }}>
+    <header className={`section-header-block reveal-on-scroll ${className}`} style={{ marginBottom: 'var(--space-xl)' }}>
       <div className="flex items-center gap-xs" style={{ marginBottom: 'var(--space-xs)' }}>
         {number && (
           <span className="font-eyebrow" style={{ color: 'var(--text-muted)' }}>

@@ -188,7 +188,7 @@ export default function ContactFooter() {
         }}>
 
           {/* ─── Hero-scale closing statement ─── */}
-          <div style={{ marginBottom: 'var(--space-2xl)' }}>
+          <div className="reveal-on-scroll" style={{ marginBottom: 'var(--space-2xl)' }}>
             <span style={{
               display: 'block',
               fontFamily: 'var(--font-family)',
@@ -230,7 +230,7 @@ export default function ContactFooter() {
           </div>
 
           {/* ─── Two-column layout: Contact | Research Links ─── */}
-          <div style={{
+          <div className="reveal-on-scroll" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: 'clamp(3rem, 6vw, 7rem)',

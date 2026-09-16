@@ -1,6 +1,7 @@
 @import './variables.css';
 @import './grid.css';
 @import './typography.css';
+@import './reveal.css';
 
 /* Modern Baseline & Strict Reset */
 *, *::before, *::after {
